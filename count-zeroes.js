@@ -1,22 +1,22 @@
 function countZeroes(arr) {
-    let lIdx = 0;
-    let rIdx = arr.length - 1;
+    let leftI = 0;
+    let rightI = arr.length - 1;
     
-    while(lIdx <= rIdx) {
-        let midIdx = Math.floor((lIdx + rIdx) / 2);
-        let midVal = arr[midIdx];
-        if(midVal != 0) {
-            lIdx = midIdx + 1;
+    while(leftI <= rightI) {
+        let midI = Math.floor((leftI + rightI) / 2);
+        let midValue = arr[midI];
+        if(midValue != 0) {
+            leftI = midI + 1;
         }
-        if(midVal === 0 && arr[midIdx - 1] === 0) {
-            rIdx = midIdx - 1;
+        if(midValue === 0 && arr[midI - 1] === 0) {
+            rightI = midI - 1;
         }
-        if(midVal === 0 && arr[midIdx -1] === 1) {
-            return arr.length - midIdx;
+        if(midValue === 0 && arr[midI -1] === 1 || midI === 0 && midValue === 0) {
+            return arr.length - midI;
         }
 
     } 
-    return -1;
+    return 0;
 }
 
 module.exports = countZeroes
