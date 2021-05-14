@@ -1,33 +1,36 @@
 function sortedFrequency(arr, num) {
-    let lowI = 0;
-    let highI = arr.length - 1;
-    
-    let firstI;
-    let lastI;
-
-    while(highI >= lowI) {
-        let midI = Math.floor((highI + lowI) / 2);
-        midVal = arr[midI];
-        if(midVal < num) {
-            lowI = midI + 1;
-        }
-        if(midVal > num) {
-            highI = midVal - 1;
-        }
-        if(midVal === num && arr[midI - 1] != num || midI === 0 && midVal === num) {
-            firstI = midI;
-        }
-        if(midVal === num && arr[midI + 1] != num || midI === arr.length - 1 && midVal === num) {
-            lastI = midI;
-        }
+    let firstI = findFirst(arr, num);
+    if (firstI == -1) return firstI;
+    let lastI = findLast(arr, num);
+    return lastI- firstI + 1;
+  }
+  
+  function findFirst(arr, num, low = 0, high = arr.length - 1) {
+    if (high >= low) {
+      let mid = Math.floor((low + high) / 2)
+      if ((mid === 0 || num > arr[mid - 1]) && arr[mid] === num) {
+        return mid;
+      } else if (num > arr[mid]) {
+        return findFirst(arr, num, mid + 1, high)
+      } else {
+        return findFirst(arr, num, low, mid - 1)
+      }
     }
-
-    while(highI >= lowI) {
-        let midI = Math.floor((highI + lowI) / 2);
-        midVal = arr[midI];
+    return -1
+  }
+  
+  function findLast(arr, num, low = 0, high = arr.length - 1) {
+    if (high >= low) {
+      let mid = Math.floor((low + high) / 2)
+      if ((mid === arr.length - 1 || num < arr[mid + 1]) && arr[mid] === num) {
+        return mid;
+      } else if (num < arr[mid]) {
+        return findLast(arr, num, low, mid - 1)
+      } else {
+        return findLast(arr, num, mid + 1, high)
+      }
     }
-
-    return lastI - firstI;
-}
-
-module.exports = sortedFrequency
+    return -1
+  }
+  
+  module.exports = sortedFrequency
