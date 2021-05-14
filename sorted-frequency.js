@@ -1,11 +1,12 @@
 function sortedFrequency(arr, num) {
     let lowI = 0;
     let highI = arr.length - 1;
-    let firstI 
-    let lastI
+    
+    let firstI;
+    let lastI;
 
-    while(lowI <= highI) {
-        midI = Math.floor((highI + lowI) / 2);
+    while(highI >= lowI) {
+        let midI = Math.floor((highI + lowI) / 2);
         midVal = arr[midI];
         if(midVal < num) {
             lowI = midI + 1;
@@ -20,6 +21,12 @@ function sortedFrequency(arr, num) {
             lastI = midI;
         }
     }
+
+    while(highI >= lowI) {
+        let midI = Math.floor((highI + lowI) / 2);
+        midVal = arr[midI];
+    }
+
     return lastI - firstI;
 }
 
